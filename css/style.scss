@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  box-sizing: border-box;
+  color: #000;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 80px 1fr 80px;
+}
+
+// Header
+
+header {
+  display: grid;
+  grid-template-columns: 22px 75px 1fr 45px 22px;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.c-header__img {
+  grid-column: 2 / 3;
+}
+
+.c-header__ion-icon {
+  font-size: 45px;
+  grid-column: 4 / 5;
+}
+
+// Chat
+.c-chat {
+  background-color: #e5e5e5;
+}
+
+.c-chat__msg {
+  background-color: #fff;
+  min-height: 40px;
+  margin-top: 4px;
+  padding: 8px;
+  border-radius: 2px;
+
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.c-chat__msg:first-of-type {
+  margin-top: 26px;
+}
+
+.c-chat__msg__time {
+    color: #aaa;
+    margin-right: 8px;
+}
+
+.is-status {
+    background-color: #dcdcdc;
+}
+
+.is-private {
+    background-color: #ffdede;
+}
+
+// Message Input
+
+.c-msg-insert {
+  display: grid;
+  grid-template-columns: 17px 1fr 17px 26px 17px;
+  align-items: center;
+
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+}
+
+#c-msg-insert__input {
+  grid-column: 2 / 3;
+
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+
+  height: 70px;
+  border: none;
+  resize: none;
+}
+
+#c-msg-insert__input::placeholder {
+  font-style: italic;
+}
+
+.c-msg-insert__ion-icon {
+  font-size: 28.84px;
+  grid-column: 4 / 5;
+}
