@@ -6,6 +6,9 @@
 
 body {
   font-family: "Roboto", sans-serif;
+}
+
+.c-main-page {
   height: 100vh;
   display: grid;
   grid-template-rows: 80px 1fr 80px;
@@ -84,4 +87,69 @@ header {
 .c-msg-insert__ion-icon {
   font-size: 28.84px;
   grid-column: 4/5;
+}
+
+.c-config-page {
+  display: grid;
+  grid-template-columns: 1fr 259px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.c-config-page__background {
+  z-index: 1;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  grid-column: 1/2;
+}
+
+.c-side-menu {
+  background-color: #fff;
+  height: 100vh;
+  width: 259px;
+  margin: 0 0 0 auto;
+  z-index: 2;
+  grid-column: 2/3;
+}
+
+.c-side-menu__section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.c-side-menu__title {
+  padding: 34px 0;
+}
+
+.c-side-menu__list {
+  width: 100%;
+}
+
+.c-side-menu__item {
+  display: grid;
+  grid-template-columns: 17px 25px 7px 1fr 13px 17px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.c-side-menu__item ion-icon {
+  grid-column: 2/3;
+  font-size: 25px;
+}
+
+.c-side-menu__item p {
+  grid-column: 4/5;
+}
+
+.c-side-menu__item img {
+  grid-column: 5/6;
+}
+
+.is-inactive {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

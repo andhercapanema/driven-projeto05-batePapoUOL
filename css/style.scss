@@ -1,55 +1,60 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 * {
-  box-sizing: border-box;
-  color: #000;
+    box-sizing: border-box;
+    color: #000;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  height: 100vh;
-  display: grid;
-  grid-template-rows: 80px 1fr 80px;
+    font-family: "Roboto", sans-serif;
+}
+
+// Página Principal
+
+.c-main-page {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 80px 1fr 80px;
 }
 
 // Header
 
 header {
-  display: grid;
-  grid-template-columns: 22px 75px 1fr 45px 22px;
-  align-items: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    display: grid;
+    grid-template-columns: 22px 75px 1fr 45px 22px;
+    align-items: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .c-header__img {
-  grid-column: 2 / 3;
+    grid-column: 2 / 3;
 }
 
 .c-header__ion-icon {
-  font-size: 45px;
-  grid-column: 4 / 5;
+    font-size: 45px;
+    grid-column: 4 / 5;
 }
 
 // Chat
 .c-chat {
-  background-color: #e5e5e5;
+    background-color: #e5e5e5;
 }
 
 .c-chat__msg {
-  background-color: #fff;
-  min-height: 40px;
-  margin-top: 4px;
-  padding: 8px;
-  border-radius: 2px;
+    background-color: #fff;
+    min-height: 40px;
+    margin-top: 4px;
+    padding: 8px;
+    border-radius: 2px;
 
-  font-size: 14px;
-  line-height: 20px;
-  display: flex;
-  align-items: center;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .c-chat__msg:first-of-type {
-  margin-top: 26px;
+    margin-top: 26px;
 }
 
 .c-chat__msg__time {
@@ -68,30 +73,101 @@ header {
 // Message Input
 
 .c-msg-insert {
-  display: grid;
-  grid-template-columns: 17px 1fr 17px 26px 17px;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 17px 1fr 17px 26px 17px;
+    align-items: center;
 
-  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
 }
 
 #c-msg-insert__input {
-  grid-column: 2 / 3;
+    grid-column: 2 / 3;
 
-  font-size: 18px;
-  display: flex;
-  align-items: center;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
 
-  height: 70px;
-  border: none;
-  resize: none;
+    height: 70px;
+    border: none;
+    resize: none;
 }
 
 #c-msg-insert__input::placeholder {
-  font-style: italic;
+    font-style: italic;
 }
 
 .c-msg-insert__ion-icon {
-  font-size: 28.84px;
-  grid-column: 4 / 5;
+    font-size: 28.84px;
+    grid-column: 4 / 5;
+}
+
+// Side Menu
+
+.c-config-page {
+    display: grid;
+    grid-template-columns: 1fr 259px;
+    
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.c-config-page__background{
+    z-index: 1;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    grid-column: 1 / 2;
+}
+
+.c-side-menu {
+    background-color: #fff;
+    height: 100vh;
+    width: 259px;
+    margin: 0 0 0 auto;
+    z-index: 2;
+    grid-column: 2 / 3;
+}
+
+.c-side-menu__section {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.c-side-menu__title {
+    padding: 34px 0;
+}
+
+.c-side-menu__list {
+    width: 100%;
+}
+
+.c-side-menu__item {
+    display: grid;
+    grid-template-columns: 17px 25px 7px 1fr 13px 17px;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.c-side-menu__item ion-icon {
+    grid-column: 2 / 3;
+    font-size: 25px;
+}
+
+.c-side-menu__item p {
+    grid-column: 4 / 5;
+}
+
+.c-side-menu__item img {
+    grid-column: 5 / 6;
+}
+
+// Statuses
+
+.is-inactive {
+    display: none;
 }

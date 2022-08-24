@@ -1,75 +1,122 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="./img/logo-icon.png" type="image/icon type" />
-    <title>Bate-Papo UOL</title>
-    <link rel="stylesheet" href="./css/reset.css" />
-    <link rel="stylesheet" href="./css/style.css" />
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="./img/logo-icon.png" type="image/icon type" />
+        <title>Bate-Papo UOL</title>
+        <link rel="stylesheet" href="./css/reset.css" />
+        <link rel="stylesheet" href="./css/style.css" />
+    </head>
 
-  <body>
-    <header>
-      <div></div>
-      <img
-        class="c-header__img"
-        src="./img/logo.svg"
-        alt="Logo do bate-papo da UOL"
-      />
-      <div></div>
-      <ion-icon class="c-header__ion-icon" name="people"></ion-icon>
-      <div></div>
-    </header>
+    <body>
+        <main class="c-main-page">
+            <header>
+                <img
+                    class="c-header__img"
+                    src="./img/logo.svg"
+                    alt="Logo do bate-papo da UOL"
+                />
+                <ion-icon class="c-header__ion-icon" name="people"></ion-icon>
+            </header>
 
-    <div class="c-chat">
-      <div class="c-chat__msg is-status">
-        <span class="c-chat__msg__time">(09:21:45)</span
-        ><strong>Fulano</strong> Mensagem de Status
-      </div>
-      <div class="c-chat__msg is-private">
-        <p>
-          <span class="c-chat__msg__time">(09:21:45)</span
-          ><strong>Fulano</strong> Mensagem Privada
-        </p>
-      </div>
-      <div class="c-chat__msg">
-        <p>
-          <span class="c-chat__msg__time">(09:21:45)</span
-          ><strong>Fulano</strong> Mensagem<strong> Ciclano</strong> Normal
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
-          tempore accusantium adipisci inventore, nisi sed rem odit itaque eos,
-          laboriosam recusandae laudantium saepe, ipsum quae optio corporis.
-          Distinctio, fuga enim?
-        </p>
-      </div>
-    </div>
+            <div class="c-chat">
+                <div class="c-chat__msg is-status">
+                    <span class="c-chat__msg__time">(09:21:45)</span
+                    ><strong>Fulano</strong> Mensagem de Status
+                </div>
+                <div class="c-chat__msg is-private">
+                    <p>
+                        <span class="c-chat__msg__time">(09:21:45)</span
+                        ><strong>Fulano</strong> Mensagem Privada
+                    </p>
+                </div>
+                <div class="c-chat__msg">
+                    <p>
+                        <span class="c-chat__msg__time">(09:21:45)</span
+                        ><strong>Fulano</strong> Mensagem<strong>
+                            Ciclano</strong
+                        >
+                        Normal Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Libero tempore accusantium adipisci
+                        inventore, nisi sed rem odit itaque eos, laboriosam
+                        recusandae laudantium saepe, ipsum quae optio corporis.
+                        Distinctio, fuga enim?
+                    </p>
+                </div>
+            </div>
 
-    <div class="c-msg-insert">
-      <textarea
-        name="input"
-        id="c-msg-insert__input"
-        cols="auto"
-        rows="auto"
-        placeholder="
+            <div class="c-msg-insert">
+                <textarea
+                    name="input"
+                    id="c-msg-insert__input"
+                    cols="auto"
+                    rows="auto"
+                    placeholder="
 Escreva aqui..."
-      ></textarea>
-      <ion-icon
-        class="c-msg-insert__ion-icon"
-        name="paper-plane-outline"
-      ></ion-icon>
-    </div>
+                ></textarea>
+                <ion-icon
+                    class="c-msg-insert__ion-icon"
+                    name="paper-plane-outline"
+                ></ion-icon>
+            </div>
+        </main>
 
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+        <div class="c-config-page is-inactive">
+            <div class="c-config-page__background"></div>
+            <aside class="c-side-menu">
+                <div class="c-side-menu__section">
+                    <p class="c-side-menu__title">
+                        <strong
+                            >Escolha um contato<br />para enviar
+                            mensagem:</strong
+                        >
+                    </p>
+                    <ul class="c-side-menu__list">
+                        <li class="c-side-menu__item">
+                            <ion-icon name="people"></ion-icon>
+                            <p>Todos</p>
+                            <img src="./img/checkmark.svg" alt="Checked" />
+                        </li>
+                        <li class="c-side-menu__item">
+                            <ion-icon name="person-circle"></ion-icon>
+                            <p>João</p>
+                        </li>
+                        <li class="c-side-menu__item">
+                            <ion-icon name="person-circle"></ion-icon>
+                            <p>Maria</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="c-side-menu__section">
+                    <p class="c-side-menu__title">
+                        <strong>Escolha a visibilidade:</strong>
+                    </p>
+                    <ul class="c-side-menu__list">
+                        <li class="c-side-menu__item">
+                            <ion-icon name="lock-open"></ion-icon>
+                            <p>Público</p>
+                            <img src="./img/checkmark.svg" alt="Checked" />
+                        </li>
+                        <li class="c-side-menu__item">
+                            <ion-icon name="lock-closed"></ion-icon>
+                            <p>Reservadamente</p>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
 
-    <script src="./script.js"></script>
-  </body>
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+        ></script>
+
+        <script src="./script.js"></script>
+    </body>
 </html>
