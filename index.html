@@ -11,7 +11,13 @@
     </head>
 
     <body>
-        <main class="c-main-page">
+        <main class="c-login-page">
+            <img class="c-login-page__img" src="./img/logo.svg" alt="Logo do bate-papo da UOL">
+            <input class="c-login-page__input" type="text" placeholder="Digite seu nome">
+            <button class="c-login-page__btn">Entrar</button>
+        </main>
+
+        <main class="c-main-page is-inactive">
             <header>
                 <img
                     class="c-header__img"
@@ -23,8 +29,10 @@
 
             <div class="c-chat">
                 <div class="c-chat__msg is-status">
-                    <span class="c-chat__msg__time">(09:21:45)</span
-                    ><strong>Fulano</strong> Mensagem de Status
+                    <p>
+                        <span class="c-chat__msg__time">(09:21:45)</span
+                        ><strong>Fulano</strong> Mensagem de Status
+                    </p>
                 </div>
                 <div class="c-chat__msg is-private">
                     <p>
@@ -48,14 +56,17 @@
             </div>
 
             <div class="c-msg-insert">
-                <textarea
-                    name="input"
-                    id="c-msg-insert__input"
-                    cols="auto"
-                    rows="auto"
-                    placeholder="
+                <div>
+                    <textarea
+                        name="input"
+                        id="c-msg-insert__input"
+                        cols="auto"
+                        rows="auto"
+                        placeholder="
 Escreva aqui..."
-                ></textarea>
+                    ></textarea>
+                    <p>Enviando para Maria (reservadamente)</p>
+                </div>
                 <ion-icon
                     class="c-msg-insert__ion-icon"
                     name="paper-plane-outline"
@@ -63,7 +74,7 @@ Escreva aqui..."
             </div>
         </main>
 
-        <div class="c-config-page is-inactive">
+        <main class="c-config-page is-inactive">
             <div class="c-config-page__background"></div>
             <aside class="c-side-menu">
                 <div class="c-side-menu__section">
@@ -106,7 +117,7 @@ Escreva aqui..."
                     </ul>
                 </div>
             </aside>
-        </div>
+        </main>
 
         <script
             type="module"
