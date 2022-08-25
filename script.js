@@ -43,7 +43,7 @@ function keepStatusOnline() {
 
 // usrInput(); // PARA ENTRAR JÁ NO CHAT!!
 
-usr = { name: "luiz" }; // PARA ENTRAR JÁ NO CHAT!!
+usr = { name: "Batman" }; // PARA ENTRAR JÁ NO CHAT!!
 login(); // PARA ENTRAR JÁ NO CHAT!!
 
 // Chat App
@@ -59,14 +59,15 @@ function loadMessages() {
             res.data.forEach((msg) => {
                 const isPrivate = msg.type === "private_message";
                 const fromOrToUsr = msg.from === usr || msg.to === usr;
+                const shouldRender = !isPrivate || (isPrivate && fromOrToUsr);
 
-                if (!isPrivate || (isPrivate && fromOrToUsr)) {
+                if (shouldRender) {
                     chatElement.innerHTML += `
                     <div class="c-chat__msg is-${msg.type}">
                         <p>
                             <span class="c-chat__msg__time">(${msg.time})</span
                             >
-                            <strong>${msg.from}</strong> para<strong>${msg.to}</strong
+                            <strong>${msg.from}</strong> para <strong>${msg.to}</strong
                             >: ${msg.text}
                         </p>
                     </div>
@@ -86,3 +87,23 @@ function loadMessages() {
 
 loadMessages();
 // setInterval(loadMessages, 3000); // Para não ficar atualizando a página toda hora
+
+function sendMessage() {
+    const msgText = document.querySelector("#c-msg-insert__input").value;
+
+    const msg = {
+        from: usr.name,
+        to: "Todos",
+        text: msgText,
+        type: "message",
+    };
+
+    axios
+        .post("https://mock-api.driven.com.br/api/v6/uol/messages", msg)
+        .then((res) => {
+            loadMessages();
+        })
+        .catch((err) => {
+            window.location.reload();
+        });
+}
