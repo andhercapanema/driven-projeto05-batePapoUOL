@@ -49,8 +49,7 @@ body {
 
 .c-main-page {
   height: 100vh;
-  display: grid;
-  grid-template-rows: 80px 1fr 80px;
+  overflow-y: hidden;
 }
 
 header {
@@ -58,6 +57,7 @@ header {
   grid-template-columns: 22px 75px 1fr 45px 22px;
   align-items: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+  top: 0;
 }
 
 .c-header__img {
@@ -71,6 +71,10 @@ header {
 
 .c-chat {
   background-color: #e5e5e5;
+  margin: 80px 0;
+  padding: 26px 0 4px;
+  height: calc(100% - 160px);
+  overflow-y: scroll;
 }
 
 .c-chat__msg {
@@ -85,8 +89,8 @@ header {
   align-items: center;
 }
 
-.c-chat__msg:first-of-type {
-  margin-top: 26px;
+.c-chat__msg:last-of-type {
+  background-color: rgb(255, 0, 0);
 }
 
 .c-chat__msg__time {
@@ -98,7 +102,7 @@ header {
   background-color: #dcdcdc;
 }
 
-.is-private {
+.is-private_message {
   background-color: #ffdede;
 }
 
@@ -107,6 +111,7 @@ header {
   grid-template-columns: 17px 1fr 17px 26px 17px;
   align-items: center;
   box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+  bottom: 0;
 }
 
 .c-msg-insert div {
@@ -136,6 +141,7 @@ header {
   color: #505050;
   font-weight: 300;
   font-size: 14px;
+  margin-left: 2px;
 }
 
 .c-msg-insert__ion-icon {
@@ -207,4 +213,12 @@ header {
 
 .is-inactive {
   display: none;
+}
+
+.u-fixed {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  height: 80px;
 }/*# sourceMappingURL=style.css.map */

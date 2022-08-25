@@ -51,23 +51,33 @@ login(); // PARA ENTRAR JÁ NO CHAT!!
 function loadMessages() {
     const chatElement = document.querySelector(".c-chat");
 
+    chatElement.innerHTML = "";
+
     axios
         .get("https://mock-api.driven.com.br/api/v6/uol/messages")
         .then((res) => {
-            console.log(res.data);
-
             res.data.forEach((msg) => {
-                chatElement.innerHTML += `
-                <div class="c-chat__msg">
-                    <p>
-                        <span class="c-chat__msg__time">(${msg.time})</span
-                        >
-                        <strong>${msg.from}</strong> para<strong>${msg.to}</strong
-                        >: ${msg.text}
-                    </p>
-                </div>
-                `;
+                const isPrivate = msg.type === "private_message";
+                const fromOrToUsr = msg.from === usr || msg.to === usr;
+
+                if (!isPrivate || (isPrivate && fromOrToUsr)) {
+                    chatElement.innerHTML += `
+                    <div class="c-chat__msg is-${msg.type}">
+                        <p>
+                            <span class="c-chat__msg__time">(${msg.time})</span
+                            >
+                            <strong>${msg.from}</strong> para<strong>${msg.to}</strong
+                            >: ${msg.text}
+                        </p>
+                    </div>
+                    `;
+                }
             });
+
+            const lastMsg = document.querySelectorAll(
+                ".c-chat__msg:last-of-type"
+            )[0];
+            lastMsg.scrollIntoView();
         })
         .catch((err) => {
             console.error(err);
@@ -75,3 +85,4 @@ function loadMessages() {
 }
 
 loadMessages();
+// setInterval(loadMessages, 3000); // Para não ficar atualizando a página toda hora
