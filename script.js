@@ -1,4 +1,6 @@
-let usr = { name: "" };
+let usr = { name: "Batman" };
+let addressee = "Todos";
+let msgType = "message";
 
 // Chat Login
 
@@ -43,7 +45,6 @@ function keepStatusOnline() {
 
 // usrInput(); // PARA ENTRAR JÁ NO CHAT!!
 
-usr = { name: "Batman" }; // PARA ENTRAR JÁ NO CHAT!!
 login(); // PARA ENTRAR JÁ NO CHAT!!
 
 // Chat App
@@ -93,9 +94,9 @@ function sendMessage() {
 
     const msg = {
         from: usr.name,
-        to: "Todos",
+        to: addressee,
         text: msgText,
-        type: "message",
+        type: msgType,
     };
 
     axios
@@ -107,3 +108,102 @@ function sendMessage() {
             window.location.reload();
         });
 }
+
+// Config page
+
+let addresseeElement = {};
+const usersList = document.querySelector(".js-users-list");
+
+function toggleConfigMenu() {
+    const configMenu = document.querySelector(".c-config-page");
+    configMenu.classList.toggle("is-inactive");
+}
+
+function usrLi(name) {
+    return `
+    <li
+        class="c-side-menu__item"
+        onclick="selectAddressee(this)"
+        data-identifier="participant"
+    >
+        <ion-icon name="person-circle"></ion-icon>
+        <p>${name}</p>
+        <img src="./img/checkmark.svg" alt="Checked" />
+    </li>
+`;
+}
+
+function fillUsersList(apiUsersList) {
+    usersList.innerHTML = usrLi("Todos");
+
+    apiUsersList.data.forEach((usr) => {
+        usersList.innerHTML += usrLi(usr.name);
+    });
+}
+
+function keepAddresseeSelected() {
+    const usersListArray = Object.values(usersList.childNodes);
+
+    addresseeElement = usersListArray.filter((usr) => {
+        const usrWithouSpace = usr.textContent.replace(/\s+/g, "");
+        return usrWithouSpace === addressee;
+    })[0];
+
+    selectAddressee(addresseeElement);
+}
+
+function updateUsers() {
+    axios
+        .get("https://mock-api.driven.com.br/api/v6/uol/participants")
+        .then((res) => {
+            fillUsersList(res);
+            keepAddresseeSelected();
+        })
+        .catch((err) => {
+            console.log("Erro no updateUsers() axios.get!");
+            console.error(err);
+        });
+}
+
+updateUsers();
+setInterval(updateUsers, 10000);
+
+function updateCheck(elSelected, elParent) {
+    const previouslySelected = document.querySelector(
+        `${elParent} .is-selected`
+    );
+    if (previouslySelected !== null) {
+        previouslySelected.classList.remove("is-selected");
+    }
+
+    elSelected.classList.add("is-selected");
+}
+
+function updateSendToInfo() {
+    const sendTo = document.querySelector(".c-msg-insert p");
+
+    const privacy = msgType === "private_message" ? "Reservado" : "Público";
+    sendTo.innerHTML = `Enviado para ${addressee} (${privacy})`;
+}
+
+function selectAddressee(to) {
+    addresseeElement = to;
+    addressee = to.innerText;
+
+    updateCheck(to, ".js-users-list");
+
+    updateSendToInfo();
+}
+
+function selectPrivacy(priv) {
+    const privWithoutSpaces = priv.innerText.replace(/\s+/g, "");
+    privWithoutSpaces === "Público"
+        ? (msgType = "message")
+        : (msgType = "private_message");
+
+    updateCheck(priv, ".js-privacy-list");
+
+    updateSendToInfo();
+}
+
+selectPrivacy(document.querySelector(".js-privacy-list li:first-of-type"));

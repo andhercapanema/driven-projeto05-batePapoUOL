@@ -26,13 +26,17 @@
         </main>
 
         <main class="c-main-page is-inactive">
-            <header class="u-fixed">
+            <header>
                 <img
                     class="c-header__img"
                     src="./img/logo.svg"
                     alt="Logo do bate-papo da UOL"
                 />
-                <ion-icon class="c-header__ion-icon" name="people"></ion-icon>
+                <ion-icon
+                    class="c-header__ion-icon"
+                    name="people"
+                    onclick="toggleConfigMenu()"
+                ></ion-icon>
             </header>
 
             <div class="c-chat">
@@ -51,9 +55,8 @@
                 <div class="c-chat__msg">
                     <p>
                         <span class="c-chat__msg__time">(09:21:45)</span
-                        ><strong>Fulano</strong> para<strong>
-                            Ciclano</strong
-                        >: Normal Lorem ipsum dolor sit amet consectetur
+                        ><strong>Fulano</strong> para<strong> Ciclano</strong>:
+                        Normal Lorem ipsum dolor sit amet consectetur
                         adipisicing elit. Libero tempore accusantium adipisci
                         inventore, nisi sed rem odit itaque eos, laboriosam
                         recusandae laudantium saepe, ipsum quae optio corporis.
@@ -62,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="c-msg-insert u-fixed">
+            <div class="c-msg-insert">
                 <div>
                     <textarea
                         name="input"
@@ -72,7 +75,7 @@
                         placeholder="
 Escreva aqui..."
                     ></textarea>
-                    <p>Enviando para Maria (reservadamente)</p>
+                    <p></p>
                 </div>
                 <ion-icon
                     class="c-msg-insert__ion-icon"
@@ -83,7 +86,10 @@ Escreva aqui..."
         </main>
 
         <main class="c-config-page is-inactive">
-            <div class="c-config-page__background"></div>
+            <div
+                class="c-config-page__background"
+                onclick="toggleConfigMenu()"
+            ></div>
             <aside class="c-side-menu">
                 <div class="c-side-menu__section">
                     <p class="c-side-menu__title">
@@ -92,35 +98,30 @@ Escreva aqui..."
                             mensagem:</strong
                         >
                     </p>
-                    <ul class="c-side-menu__list">
-                        <li class="c-side-menu__item">
-                            <ion-icon name="people"></ion-icon>
-                            <p>Todos</p>
-                            <img src="./img/checkmark.svg" alt="Checked" />
-                        </li>
-                        <li class="c-side-menu__item">
-                            <ion-icon name="person-circle"></ion-icon>
-                            <p>João</p>
-                        </li>
-                        <li class="c-side-menu__item">
-                            <ion-icon name="person-circle"></ion-icon>
-                            <p>Maria</p>
-                        </li>
-                    </ul>
+                    <ul class="c-side-menu__list js-users-list"></ul>
                 </div>
                 <div class="c-side-menu__section">
                     <p class="c-side-menu__title">
                         <strong>Escolha a visibilidade:</strong>
                     </p>
-                    <ul class="c-side-menu__list">
-                        <li class="c-side-menu__item">
+                    <ul class="c-side-menu__list js-privacy-list">
+                        <li
+                            class="c-side-menu__item"
+                            onclick="selectPrivacy(this)"
+                            data-identifier="visibility"
+                        >
                             <ion-icon name="lock-open"></ion-icon>
                             <p>Público</p>
                             <img src="./img/checkmark.svg" alt="Checked" />
                         </li>
-                        <li class="c-side-menu__item">
+                        <li
+                            class="c-side-menu__item"
+                            onclick="selectPrivacy(this)"
+                            data-identifier="visibility"
+                        >
                             <ion-icon name="lock-closed"></ion-icon>
-                            <p>Reservadamente</p>
+                            <p>Reservado</p>
+                            <img src="./img/checkmark.svg" alt="Checked" />
                         </li>
                     </ul>
                 </div>

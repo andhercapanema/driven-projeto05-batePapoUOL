@@ -9,6 +9,16 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+// Mixins
+
+@mixin fixed() {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    height: 80px;
+}
+
 // Login Page
 .c-login-page {
     display: grid;
@@ -70,6 +80,7 @@ header {
     align-items: center;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 
+    @include fixed;
     top: 0;
 }
 
@@ -106,13 +117,14 @@ header {
     align-items: center;
 }
 
-.c-chat__msg:last-of-type {
-    background-color: rgb(255, 0, 0);
-}
-
 .c-chat__msg__time {
     color: #aaa;
     margin-right: 8px;
+}
+
+.c-chat__msg p {
+    width: 100%;
+    overflow-wrap: break-word;
 }
 
 .is-status {
@@ -132,6 +144,7 @@ header {
 
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
 
+    @include fixed;
     bottom: 0;
 }
 
@@ -182,6 +195,8 @@ header {
     width: 100%;
     left: 0;
     top: 0;
+
+    overflow: hidden;
 }
 
 .c-config-page__background {
@@ -198,11 +213,13 @@ header {
     background-color: #fff;
     height: 100vh;
     width: 259px;
-    margin: 0 0 0 auto;
+    padding-top: 34px;
     z-index: 2;
     grid-column: 2 / 3;
 
     // transform: translateX(259px);
+
+    overflow-x: hidden;
 }
 
 .c-side-menu__section {
@@ -213,12 +230,10 @@ header {
     align-items: center;
 }
 
-.c-side-menu__title {
-    padding: 34px 0;
-}
-
 .c-side-menu__list {
     width: 100%;
+
+    padding: 34px 0;
 }
 
 .c-side-menu__item {
@@ -235,24 +250,23 @@ header {
 
 .c-side-menu__item p {
     grid-column: 4 / 5;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    overflow-wrap: break-word;
 }
 
 .c-side-menu__item img {
     grid-column: 5 / 6;
+    display: none;
+}
+
+.is-selected img {
+    display: initial;
 }
 
 // Statuses
 
 .is-inactive {
     display: none;
-}
-
-// Utilitaries
-
-.u-fixed {
-    position: fixed;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    height: 80px;
 }
