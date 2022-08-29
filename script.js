@@ -6,10 +6,10 @@ let msgType = "message";
 
 function loading() {
     const usrInsertPage = document.querySelector(".c-login-page__usr-insert");
-    usrInsertPage.classList.add('is-inactive');
+    usrInsertPage.classList.add("is-inactive");
 
     const loadingPage = document.querySelector(".c-login-page__loading");
-    loadingPage.classList.remove('is-inactive');
+    loadingPage.classList.remove("is-inactive");
 }
 
 function keepStatusOnline() {
@@ -33,7 +33,6 @@ function login() {
 }
 
 function usrInput() {
-    const usrNameEl = document.querySelector(".c-login-page__input");
     usr.name = usrNameEl.value;
 
     loading();
@@ -56,9 +55,13 @@ function usrInput() {
     });
 }
 
-// usrInput(); // PARA ENTRAR JÁ NO CHAT!!
+const usrNameEl = document.querySelector(".c-login-page__input");
 
-// login(); // PARA ENTRAR JÁ NO CHAT!!
+usrNameEl.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        usrInput();
+    }
+});
 
 // Chat App
 
@@ -100,7 +103,8 @@ function loadMessages() {
 }
 
 function sendMessage() {
-    const msgText = document.querySelector("#c-msg-insert__input").value;
+    const msgText = msgTextEl.value;
+    msgTextEl.value = "";
 
     const msg = {
         from: usr.name,
@@ -118,6 +122,14 @@ function sendMessage() {
             window.location.reload();
         });
 }
+
+const msgTextEl = document.querySelector("#c-msg-insert__input");
+
+msgTextEl.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+});
 
 loadMessages();
 setInterval(loadMessages, 3000); // Para não ficar atualizando a página toda hora
@@ -154,6 +166,37 @@ function fillUsersList(apiUsersList) {
     });
 }
 
+function updateCheck(elSelected, elParent) {
+    const previouslySelected = document.querySelector(
+        `${elParent} .is-selected`
+    );
+    if (previouslySelected !== null) {
+        previouslySelected.classList.remove("is-selected");
+    }
+
+    elSelected.classList.add("is-selected");
+}
+
+function updateSendToInfo() {
+    const sendTo = document.querySelector(".c-msg-insert p");
+
+    const privacy = msgType === "private_message" ? "Reservado" : "Público";
+    sendTo.innerHTML = `Enviado para ${addressee} (${privacy})`;
+}
+
+function selectAddressee(to) {
+    if(to === undefined || to === null){
+        to = document.querySelector(".js-users-list:first-child");
+    }
+    
+    addresseeElement = to;
+    addressee = to.textContent.replace(/\s+/g, "");
+
+    updateCheck(to, ".js-users-list");
+
+    updateSendToInfo();
+}
+
 function keepAddresseeSelected() {
     const usersListArray = Object.values(usersList.childNodes);
 
@@ -176,33 +219,6 @@ function updateUsers() {
             console.log("Erro no updateUsers() axios.get!");
             console.error(err);
         });
-}
-
-function updateCheck(elSelected, elParent) {
-    const previouslySelected = document.querySelector(
-        `${elParent} .is-selected`
-    );
-    if (previouslySelected !== null) {
-        previouslySelected.classList.remove("is-selected");
-    }
-
-    elSelected.classList.add("is-selected");
-}
-
-function updateSendToInfo() {
-    const sendTo = document.querySelector(".c-msg-insert p");
-
-    const privacy = msgType === "private_message" ? "Reservado" : "Público";
-    sendTo.innerHTML = `Enviado para ${addressee} (${privacy})`;
-}
-
-function selectAddressee(to) {
-    addresseeElement = to;
-    addressee = to.innerText;
-
-    updateCheck(to, ".js-users-list");
-
-    updateSendToInfo();
 }
 
 function selectPrivacy(priv) {
