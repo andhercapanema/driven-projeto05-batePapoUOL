@@ -1,3 +1,5 @@
+const urlAPI = "https://mock-api.driven..com.br/api/v6/uol/";
+
 let usr = { name: "Batman" };
 let addressee = "Todos";
 let msgType = "message";
@@ -14,7 +16,7 @@ function loading() {
 
 function keepStatusOnline() {
     const promise = axios.post(
-        "https://mock-api.driven.com.br/api/v6/uol/status",
+        `${urlAPI}status`,
         usr
     );
 }
@@ -38,7 +40,7 @@ function usrInput() {
     loading();
 
     const promise = axios.post(
-        "https://mock-api.driven.com.br/api/v6/uol/participants",
+        `${urlAPI}participants`,
         usr
     );
 
@@ -49,7 +51,7 @@ function usrInput() {
             window.location.reload();
             usrNameEl.value = "";
         } else {
-            console.log("Erro não cadastrado!");
+            console.log("Erro no usrInput axios.post!");
             console.log(err.response);
         }
     });
@@ -106,7 +108,7 @@ function loadMessages() {
     chatElement.innerHTML = "";
 
     axios
-        .get("https://mock-api.driven.com.br/api/v6/uol/messages")
+        .get(`${urlAPI}messages`)
         .then((res) => {
             res.data.forEach((msg) => {
                 msgTime = +msg.time.slice(0, 2) + 9 + msg.time.slice(2);
@@ -143,7 +145,7 @@ function sendMessage() {
     };
 
     axios
-        .post("https://mock-api.driven.com.br/api/v6/uol/messages", msg)
+        .post(`${urlAPI}messages`, msg)
         .then((res) => {
             loadMessages();
         })
@@ -172,7 +174,9 @@ function toggleConfigMenu() {
     const configMenu = document.querySelector(".c-config-page");
     configMenu.classList.toggle("is-inactive");
 
-    const configBackground = document.querySelector(".c-config-page__background");
+    const configBackground = document.querySelector(
+        ".c-config-page__background"
+    );
     configBackground.classList.toggle("c-config-page__background--is-inactive");
 
     const sideMenu = document.querySelector(".c-side-menu");
@@ -245,7 +249,7 @@ function keepAddresseeSelected() {
 
 function updateUsers() {
     axios
-        .get("https://mock-api.driven.com.br/api/v6/uol/participants")
+        .get(`${urlAPI}participants`)
         .then((res) => {
             fillUsersList(res);
             keepAddresseeSelected();
