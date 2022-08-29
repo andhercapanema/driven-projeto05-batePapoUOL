@@ -4,36 +4,12 @@ let msgType = "message";
 
 // Chat Login
 
-function usrInput() {
-    usr.name = prompt("Qual é o seu lindo nome?");
+function loading() {
+    const usrInsertPage = document.querySelector(".c-login-page__usr-insert");
+    usrInsertPage.classList.add('is-inactive');
 
-    const promise = axios.post(
-        "https://mock-api.driven.com.br/api/v6/uol/participants",
-        usr
-    );
-
-    promise.then(login);
-    promise.catch(errorHandling);
-}
-
-function errorHandling(err) {
-    if (err.response.status === 400) {
-        alert("Nome de usuário já utilizado, favor inserir outro!");
-        usrInput();
-    } else {
-        console.log("Erro não cadastrado!");
-        console.log(err.response);
-    }
-}
-
-function login() {
-    const loginPage = document.querySelector(".c-login-page");
-    loginPage.classList.add("is-inactive");
-
-    const chatPage = document.querySelector(".c-main-page");
-    chatPage.classList.remove("is-inactive");
-
-    setInterval(keepStatusOnline, 5000);
+    const loadingPage = document.querySelector(".c-login-page__loading");
+    loadingPage.classList.remove('is-inactive');
 }
 
 function keepStatusOnline() {
@@ -43,9 +19,46 @@ function keepStatusOnline() {
     );
 }
 
+function login() {
+    const loginPage = document.querySelector(".c-login-page");
+    loginPage.classList.add("is-inactive");
+
+    const chatPage = document.querySelector(".c-main-page");
+    chatPage.classList.remove("is-inactive");
+
+    const input = chatPage.querySelector("#c-msg-insert__input");
+    input.value = "";
+
+    setInterval(keepStatusOnline, 5000);
+}
+
+function usrInput() {
+    const usrNameEl = document.querySelector(".c-login-page__input");
+    usr.name = usrNameEl.value;
+
+    loading();
+
+    const promise = axios.post(
+        "https://mock-api.driven.com.br/api/v6/uol/participants",
+        usr
+    );
+
+    promise.then(login);
+    promise.catch((err) => {
+        if (err.response.status === 400) {
+            alert("Nome de usuário já utilizado, favor inserir outro!");
+            window.location.reload();
+            usrNameEl.value = "";
+        } else {
+            console.log("Erro não cadastrado!");
+            console.log(err.response);
+        }
+    });
+}
+
 // usrInput(); // PARA ENTRAR JÁ NO CHAT!!
 
-login(); // PARA ENTRAR JÁ NO CHAT!!
+// login(); // PARA ENTRAR JÁ NO CHAT!!
 
 // Chat App
 
@@ -86,9 +99,6 @@ function loadMessages() {
         });
 }
 
-loadMessages();
-// setInterval(loadMessages, 3000); // Para não ficar atualizando a página toda hora
-
 function sendMessage() {
     const msgText = document.querySelector("#c-msg-insert__input").value;
 
@@ -108,6 +118,9 @@ function sendMessage() {
             window.location.reload();
         });
 }
+
+loadMessages();
+setInterval(loadMessages, 3000); // Para não ficar atualizando a página toda hora
 
 // Config page
 
@@ -165,9 +178,6 @@ function updateUsers() {
         });
 }
 
-updateUsers();
-setInterval(updateUsers, 10000);
-
 function updateCheck(elSelected, elParent) {
     const previouslySelected = document.querySelector(
         `${elParent} .is-selected`
@@ -206,4 +216,6 @@ function selectPrivacy(priv) {
     updateSendToInfo();
 }
 
+updateUsers();
+setInterval(updateUsers, 10000);
 selectPrivacy(document.querySelector(".js-privacy-list li:first-of-type"));

@@ -17,12 +17,24 @@
                 src="./img/logo.svg"
                 alt="Logo do bate-papo da UOL"
             />
-            <input
-                class="c-login-page__input"
-                type="text"
-                placeholder="Digite seu nome"
-            />
-            <button class="c-login-page__btn">Entrar</button>
+            <div class="c-login-page__usr-insert">
+                <input
+                    class="c-login-page__input"
+                    type="text"
+                    placeholder="Digite seu nome"
+                />
+                <button class="c-login-page__btn" onclick="usrInput()">
+                    Entrar
+                </button>
+            </div>
+            <div class="c-login-page__loading is-inactive">
+                <img
+                    class="c-login-page__gif"
+                    src="./img/loading.gif"
+                    alt="Entrando no chat"
+                />
+                <p>Entrando...</p>
+            </div>
         </main>
 
         <main class="c-main-page is-inactive">
