@@ -116,14 +116,6 @@ function loadMessages() {
                     msg.from === usr.name || msg.to === usr.name;
                 const shouldRender = !isPrivate || (isPrivate && fromOrToUsr);
 
-                if (!shouldRender) {
-                    console.log(`isPrivate: ${isPrivate}`);
-                    console.log(`fromOrToUsr: ${fromOrToUsr}`);
-                    console.log(`usr: ${usr.name}`);
-                    console.log(`msg.from: ${msg.from}`);
-                    console.log(`msg.to: ${msg.to}`);
-                }
-
                 if (shouldRender) {
                     chatElement.innerHTML += msgDiv(msg);
                 }
@@ -169,7 +161,7 @@ msgTextEl.addEventListener("keypress", function (event) {
 });
 
 loadMessages();
-setInterval(loadMessages, 10000); // Para não ficar atualizando a página toda hora
+setInterval(loadMessages, 3000); // Para não ficar atualizando a página toda hora
 
 // Config page
 
@@ -179,6 +171,12 @@ const usersList = document.querySelector(".js-users-list");
 function toggleConfigMenu() {
     const configMenu = document.querySelector(".c-config-page");
     configMenu.classList.toggle("is-inactive");
+
+    const configBackground = document.querySelector(".c-config-page__background");
+    configBackground.classList.toggle("c-config-page__background--is-inactive");
+
+    const sideMenu = document.querySelector(".c-side-menu");
+    sideMenu.classList.toggle("c-side-menu--is-inactive");
 }
 
 function usrLi(name) {

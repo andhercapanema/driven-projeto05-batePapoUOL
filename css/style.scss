@@ -214,6 +214,13 @@ header {
 
 // Side Menu
 
+.c-config-page.is-inactive {
+    display: none;
+    z-index: -1;
+
+    transition: all 1000ms ease;
+}
+
 .c-config-page {
     display: grid;
     grid-template-columns: 1fr 259px;
@@ -236,6 +243,10 @@ header {
     position: absolute;
 }
 
+.c-config-page__background--is-inactive{
+    transition: all 1000ms ease;
+}
+
 .c-side-menu {
     background-color: #fff;
     height: 100vh;
@@ -244,9 +255,15 @@ header {
     z-index: 2;
     grid-column: 2 / 3;
 
-    // transform: translateX(259px);
+    transform: translateX(0);
+    transition: all 1000ms ease;
 
     overflow-x: hidden;
+}
+
+.c-side-menu--is-inactive{
+    transform: translateX(259px);
+    transition: all 1000ms ease;
 }
 
 .c-side-menu__section {
