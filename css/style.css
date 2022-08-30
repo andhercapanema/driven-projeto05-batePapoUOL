@@ -168,8 +168,19 @@ header {
   border: none;
   resize: none;
 }
+#c-msg-insert__input ::placeholder,
+#c-msg-insert__input ::-webkit-input-placeholder,
+#c-msg-insert__input :-moz-placeholder,
+#c-msg-insert__input ::-moz-placeholder,
+#c-msg-insert__input :-ms-input-placeholder,
+#c-msg-insert__input ::-ms-input-placeholder,
+#c-msg-insert__input :placeholder-shown {
+  font-style: italic;
+  color: #000;
+  opacity: 1;
+}
 
-#c-msg-insert__input::placeholder {
+#c-msg-insert__input:-moz-placeholder {
   font-style: italic;
   color: #000;
 }

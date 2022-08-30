@@ -1,4 +1,4 @@
-const urlAPI = "https://mock-api.driven..com.br/api/v6/uol/";
+const urlAPI = "https://mock-api.driven.com.br/api/v6/uol/";
 
 let usr = { name: "Batman" };
 let addressee = "Todos";
@@ -15,10 +15,7 @@ function loading() {
 }
 
 function keepStatusOnline() {
-    const promise = axios.post(
-        `${urlAPI}status`,
-        usr
-    );
+    const promise = axios.post(`${urlAPI}status`, usr);
 }
 
 function login() {
@@ -39,10 +36,7 @@ function usrInput() {
 
     loading();
 
-    const promise = axios.post(
-        `${urlAPI}participants`,
-        usr
-    );
+    const promise = axios.post(`${urlAPI}participants`, usr);
 
     promise.then(login);
     promise.catch((err) => {
@@ -67,14 +61,18 @@ usrNameEl.addEventListener("keypress", function (event) {
 
 // Chat App
 
-let msgTime = "00:00:00";
+let adjustedMsgTime = "00:00:00";
+let lastUpdated = 0;
+let numberedTime = 0;
+let isNew = numberedTime > lastUpdated;
+let lastMsgScrolled = [];
 
 function msgDiv(msg) {
     const standardMsg = {
         beginning: `
         <div class="c-chat__msg is-${msg.type}">
         <p>
-        <span class="c-chat__msg__time">(${msgTime})</span>
+        <span class="c-chat__msg__time">(${adjustedMsgTime})</span>
         `,
         end: `
         </p>
@@ -102,31 +100,53 @@ function msgDiv(msg) {
     }
 }
 
+function handleTime(msg) {
+    const adjustedHour =
+        +msg.time.slice(0, 2) + 9 > 12
+            ? +msg.time.slice(0, 2) + 9 - 12
+            : +msg.time.slice(0, 2) + 9;
+
+    adjustedMsgTime = adjustedHour + msg.time.slice(2);
+    numberedTime = +adjustedMsgTime.replace(/:/g, "");
+
+    isNew = numberedTime > lastUpdated;
+    if (isNew) {
+        lastUpdated = numberedTime;
+        console.log(`atualizaou o lastUpdated: ${lastUpdated}`);
+    }
+}
+
+function scrollLastMsgIntoView() {
+    const lastMsg = document.querySelector(".c-chat__msg:last-of-type");
+    if (lastMsg !== lastMsgScrolled) {
+        lastMsg.scrollIntoView();
+        console.log("mandou pra baixo!");
+        lastMsgScrolled = lastMsg;
+    }
+}
+
 function loadMessages() {
     const chatElement = document.querySelector(".c-chat");
-
-    chatElement.innerHTML = "";
 
     axios
         .get(`${urlAPI}messages`)
         .then((res) => {
             res.data.forEach((msg) => {
-                msgTime = +msg.time.slice(0, 2) + 9 + msg.time.slice(2);
+                handleTime(msg);
 
                 const isPrivate = msg.type === "private_message";
                 const fromOrToUsr =
                     msg.from === usr.name || msg.to === usr.name;
-                const shouldRender = !isPrivate || (isPrivate && fromOrToUsr);
+                const shouldRender =
+                    (!isPrivate || (isPrivate && fromOrToUsr)) && isNew;
 
                 if (shouldRender) {
                     chatElement.innerHTML += msgDiv(msg);
                 }
             });
 
-            const lastMsg = document.querySelectorAll(
-                ".c-chat__msg:last-of-type"
-            )[0];
-            lastMsg.scrollIntoView();
+            console.log('atualizou mensagens')
+            scrollLastMsgIntoView();
         })
         .catch((err) => {
             console.error(err);
@@ -184,9 +204,15 @@ function toggleConfigMenu() {
 }
 
 function usrLi(name) {
+    // Para manter o usuário selecionado ao atualizar a lista
+    let selected = "";
+    if (name === addressee) {
+        selected = "is-selected";
+    }
+
     return `
     <li
-        class="c-side-menu__item"
+        class="c-side-menu__item ${selected}"
         onclick="selectAddressee(this)"
         data-identifier="participant"
     >
@@ -236,7 +262,8 @@ function selectAddressee(to) {
     updateSendToInfo();
 }
 
-function keepAddresseeSelected() {
+// Refatorei na linha 181
+/* function keepAddresseeSelected() {
     const usersListArray = Object.values(usersList.childNodes);
 
     addresseeElement = usersListArray.filter((usr) => {
@@ -245,14 +272,14 @@ function keepAddresseeSelected() {
     })[0];
 
     selectAddressee(addresseeElement);
-}
+} */
 
 function updateUsers() {
     axios
         .get(`${urlAPI}participants`)
         .then((res) => {
             fillUsersList(res);
-            keepAddresseeSelected();
+            // keepAddresseeSelected();
         })
         .catch((err) => {
             console.log("Erro no updateUsers() axios.get!");
